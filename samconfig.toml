@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "sentiment-analysis-api"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-adp6p3ocsygi"
+s3_prefix = "sentiment-analysis-api"
+region = "ap-northeast-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
