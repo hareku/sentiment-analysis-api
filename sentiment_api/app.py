@@ -3,14 +3,11 @@ import os
 import pickle
 import tokenizer
 
-def predict(text):
-    with open(os.path.join(os.getcwd(), 'models/vectorizer.pickle'), mode='rb') as vf, open(os.path.join(os.getcwd(), 'models/bayes.pickle'), mode='rb') as bf:
-        vectorizer = pickle.load(vf)
-        clf = pickle.load(bf)
+vectorizer = pickle.load(open(os.path.join(os.getcwd(), 'models/vectorizer.pickle'), mode='rb'))
+bayes = pickle.load(open(os.path.join(os.getcwd(), 'models/bayes.pickle'), mode='rb'))
 
-        vec = vectorizer.transform([text])
-        proba = clf.predict_proba(vec)
-        return proba
+def predict_proba(text):
+    return bayes.predict_proba(vectorizer.transform([text]))[0]
 
 def lambda_handler(event, context):
     """Lambda function
@@ -44,8 +41,7 @@ def lambda_handler(event, context):
             'body': json.dumps({'message': 'please add "sentence" query'})
         }
 
-    proba = predict(query['sentence'])[0]
-
+    proba = predict_proba(query['sentence'])
     res_body = {
         'result': {
             'Positive': proba[0],
