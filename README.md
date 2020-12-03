@@ -16,6 +16,10 @@ This app uses [Twitter日本語評判分析データセット](http://www.db.inf
 
 But **dataset doesn't include tweet text to obey Twitter Terms of Service**. So you have to download tweet texts yourself via Twitter API and store CSV to `sentiment_api/data/tweets_dataset.csv`.
 
+## Model Evaluation
+
+Do you want to know the model accuracy, and how the model was trained? See [sentiment_api/training.ipynb](sentiment_api/training.ipynb).
+
 ## Local development
 
 ```bash
