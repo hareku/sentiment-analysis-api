@@ -9,8 +9,8 @@ Resources:
     Properties:
       CodeUri: sentiment_api/
       Handler: app.lambda_handler
-      Timeout: 15
-      MemorySize: 256
+      Timeout: 10
+      MemorySize: 128
       Runtime: python3.8
       Events:
         CatchGet:
