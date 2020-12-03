@@ -5,7 +5,7 @@ The sentiment score is calculated by **Multinomial Naive Bayes**.
 
 ```bash
 curl http://localhost:3000/?sentence=この映画は最高です
-# {"result": {"Positive": 0.7202986438902886, "Negative": 0.05249962331310942, "Neutral": 0.22720173279659972}}
+# {"result": {"Positive": 0.8138175294673967, "Negative": 0.029238149491493233, "Neutral": 0.15694432104111128}}
 ```
 
 You can deploy to AWS (API Gateway + Lambda).
