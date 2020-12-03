@@ -39,5 +39,5 @@ sam local start-api
 ## Deploy to AWS
 
 ```bash
-sam deploy --guided
+sam deploy --tags "Project=JapaneseSentimentAnalysisAPI" --guided
 ```
