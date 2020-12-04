@@ -31,7 +31,6 @@ def lambda_handler(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    print(event['body'])
     body = json.loads(event['body'])
     if 'TextList' not in body or not isinstance(body['TextList'], list):
         return {
