@@ -4,8 +4,8 @@ This is Japanese Text Sentiment Analysis API.
 The sentiment score is calculated by **Multinomial Naive Bayes**.
 
 ```bash
-curl http://localhost:3000/?sentence=この映画は最高です
-# {"result": {"Positive": 0.8138175294673967, "Negative": 0.029238149491493233, "Neutral": 0.15694432104111128}}
+curl -X POST -d '{\"TextList\": [\"この映画は最高です\"]}' http://127.0.0.1:3000/
+# {"result": [{"Positive": 0.8138175294673967, "Negative": 0.029238149491493233, "Neutral": 0.15694432104111128}}]
 ```
 
 You can deploy to AWS (API Gateway + Lambda).

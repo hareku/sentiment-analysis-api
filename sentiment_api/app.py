@@ -6,8 +6,8 @@ import tokenizer
 vectorizer = pickle.load(open(os.path.join(os.getcwd(), 'models/vectorizer.pickle'), mode='rb'))
 bayes = pickle.load(open(os.path.join(os.getcwd(), 'models/bayes.pickle'), mode='rb'))
 
-def predict_proba(text):
-    return bayes.predict_proba(vectorizer.transform([text]))[0]
+def predict_proba(textList):
+    return bayes.predict_proba(vectorizer.transform(textList))
 
 def lambda_handler(event, context):
     """Lambda function
@@ -31,23 +31,28 @@ def lambda_handler(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    query = event['queryStringParameters']
-    if query is None or 'sentence' not in query:
+    print(event['body'])
+    body = json.loads(event['body'])
+    if 'TextList' not in body or not isinstance(body['TextList'], list):
         return {
             'statusCode': 422,
             'headers': {
                 'Content-Type': 'application/json',
             },
-            'body': json.dumps({'message': 'please add "sentence" query'})
+            'body': json.dumps({'message': 'The request body must habe "TextList" to analyze.'})
         }
 
-    proba = predict_proba(query['sentence'])
+    proba = predict_proba(body['TextList'])
+    result = []
+    for p in proba:
+        result.append({
+            'Positive': p[0],
+            'Negative': p[1],
+            'Neutral': p[2],
+        })
+
     res_body = {
-        'result': {
-            'Positive': proba[0],
-            'Negative': proba[1],
-            'Neutral': proba[2],
-        }
+        'result': result
     }
 
     return {
